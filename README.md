@@ -1,8 +1,7 @@
 Example Voting App
 =========
 
-Testing branch protection rule
-Testing again
+This is a sample voting app.
 
 Getting started
 ---------------
