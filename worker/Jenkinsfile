@@ -6,27 +6,27 @@ pipeline {
   }
 
   stages{
-    stage("build"){
-      steps{
-        echo 'Compiling worker app'
-        dir('worker'){
-          sh 'mvn compile'
+      stage("build"){
+        steps{
+            echo 'Compiling worker app'
+            dir('worker'){
+            sh 'mvn compile'
+            }
         }
-      }
     
-    stage("test"){
-      steps{
-        echo 'Running Unit Tests on worker app'
-        echo 'Testing'
+      stage("test"){
+        steps{
+            echo 'Running Unit Tests on worker app'
+            echo 'Testing'
    
+            }
         }
-      }
-    stage("package"){
-      steps{
-        echo 'Packaging worker app'
-      }
-    }
-    } 
+      stage("package"){
+        steps{
+            echo 'Packaging worker app'
+        }
+        }
+      } 
     }
 
   post{    
