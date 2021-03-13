@@ -13,7 +13,7 @@ pipeline {
           sh 'mvn compile'
         }
       }
-    }
+    
     stage("test"){
       steps{
         echo 'Running Unit Tests on worker app'
@@ -26,7 +26,7 @@ pipeline {
         echo 'Packaging worker app'
       }
     }
-    
+  }  
   post{    
     always{ 
       echo 'Building multibranch pipeline for worker is completed..' 
