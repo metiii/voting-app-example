@@ -1,0 +1,46 @@
+pipeline {
+  agent{ 
+    docker{
+      image 'node:lts-buster-slim'
+      }	
+  } 
+  stages{
+      stage("build"){
+        when{
+          changeset "**/result/**"
+        }
+        steps{
+            echo 'Compiling worker app'
+            dir('result'){
+            sh 'npm install'
+            }
+        }
+      }
+      stage("test"){
+        when{
+          changeset "**/result/**"
+          }
+        steps{
+            echo 'Running Unit Tests on worker app'
+            dir('result'){
+              sh 'npm install'
+	      sh 'npm test'
+            }
+
+            }
+        }
+    }   
+    
+
+  post{
+    always{
+      echo 'Building multibranch pipeline for worker is completed..'
+    }
+    failure{
+    slackSend (channel: "instavote-cd", message: "Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
+    }
+    success{
+      slackSend (channel: "instavote-cd", message: "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
+    }
+  }
+}
