@@ -18,7 +18,7 @@ pipeline {
             }
         }
       }
-      stage("test"){
+    stage("test"){
         agent{
            docker{
              image 'python:2.7.16-slim'
@@ -31,11 +31,13 @@ pipeline {
         steps{
             echo 'Running Unit Tests on worker app'
             dir('vote'){
-              sh 'nosetests -v'
+              sh 'pip install -r requirements.txt'
+	      sh 'nosetests -v'
+	      
             }
 
             }
-        }
+        } 
     stage('docker-package'){
        agent any
        when{
