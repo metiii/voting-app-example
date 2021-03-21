@@ -45,7 +45,7 @@ pipeline {
 	 echo 'Packing vote app with docker'
 	 script{
  	   docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
- 	     def workerImage = docker.build("metiii/vote:v${env.BUILD_ID}", "./worker")
+ 	     def workerImage = docker.build("metiii/vote:v${env.BUILD_ID}", "./vote")
 	     workerImage.push()
 	     workerImage.push("latest")
 	  }
