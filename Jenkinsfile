@@ -187,7 +187,7 @@ pipeline {
     stage('deploy to dev'){
       agent any
       when{
-        branch 'master'
+        branch 'main'
         }
       steps{
         echo 'Deploy instavote app with docker compose'
